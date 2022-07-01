@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
-display = Display(visible=0, size=(1600, 1200))
+display = Display(visible=0, size=(480, 280))
 display.start()
 
 options = Options()
@@ -18,7 +18,7 @@ driver = webdriver.Chrome(options=options, service=Service(driver_path))
 driver.get("https://www.google.com")
 print("site opened")
 time.sleep(3)
-driver.save_screenshot('screenshot.png')
+driver.save_screenshot('screenshot1.png')
 print("screenshot taken")
 driver.close()
 

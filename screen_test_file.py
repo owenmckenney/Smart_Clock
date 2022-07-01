@@ -28,13 +28,13 @@ def imageToDisplay(path):
     background = Image.new('1', (epd3in7.EPD_HEIGHT, epd3in7.EPD_WIDTH), 255)
     draw = ImageDraw.Draw(background)
     pic = Image.open(path)
-    background.paste(pic, (50, 50))
+    background.paste(pic, (0, 0))
     epd.display_4Gray(epd.getbuffer_4Gray(background))
     
 
 #printToDisplay("Owen McKenney")
 
-p = '/home/pi/Documents/Smart_Clock/rpi_image_delivery/images.png'
+p = '/home/pi/Documents/Smart_Clock/screenshot1.png'
 imageToDisplay(p)
 
 

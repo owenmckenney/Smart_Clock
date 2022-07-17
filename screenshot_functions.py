@@ -23,7 +23,7 @@ def new_screenshot():
     options.BinaryLocation = "/usr/bin/chromium-browser"
     driver_path = "/usr/bin/chromedriver"
     driver = webdriver.Chrome(options=options, service=Service(driver_path))
-    driver.get("https://www.google.com")
+    driver.get("http://192.168.86.103/")
     #time.sleep(3)
 
     f = open("current_screenshot.txt", 'r+')

@@ -26,17 +26,17 @@ class display:
         self.height = epd3in7.EPD_HEIGHT
         self.width = epd3in7.EPD_HEIGHT
         self.background = Image.new('1', (epd3in7.EPD_HEIGHT, epd3in7.EPD_WIDTH), 255)
+        self.image_path = '/home/pi/Documents/Smart_Clock/images/'
 
     def font_size(self, size):
-        return ImageFont.truetype('/home/pi/Documents/Smart_Clock/Roboto-Black.ttf', size)
+        return ImageFont.truetype('/home/pi/Documents/Smart_Clock/fonts/Roboto-Black.ttf', size)
 
     def resize_image(self, image, basewidth):
-        path = '/home/pi/Documents/Smart_Clock/'
-        img = Image.open(path + image)
+        img = Image.open(self.image_path + image)
         wpercent = (basewidth/float(img.size[0]))
         hsize = int((float(img.size[1])*float(wpercent)))
         img = img.resize((basewidth, hsize), Image.ANTIALIAS)
-        img.save(path + image)
+        img.save(self.image_path + image)
 
     def scrape_weather(self):
         options = Options()
@@ -98,16 +98,16 @@ class display:
         data_draw.rectangle((date_width + 10, 0, date_width + 15, 280), fill=0)
 
     def update_weather(self):
-        pic = Image.open('/home/pi/Documents/Smart_Clock/currentTemp.png')
+        pic = Image.open(self.image_path + 'currentTemp.png')
         self.background.paste(pic, (300, 20))
 
-        pic = Image.open('/home/pi/Documents/Smart_Clock/weatherImage.png')
+        pic = Image.open(self.image_path + 'weatherImage.png')
         self.background.paste(pic, (325, 150))
 
-        pic = Image.open('/home/pi/Documents/Smart_Clock/highLow.png')
+        pic = Image.open(self.image_path + 'highLow.png')
         self.background.paste(pic, (328, 10))
 
-        pic = Image.open('/home/pi/Documents/Smart_Clock/likeTemp.png')
+        pic = Image.open(self.image_path + 'likeTemp.png')
         self.background.paste(pic, (328, 125))
 
     def update_display(self):

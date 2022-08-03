@@ -8,8 +8,7 @@ if os.path.exists(libdir):
     sys.path.append(libdir)
 
 import logging
-#from waveshare_epd import epd3in7
-from waveshare_lib import epd3in7
+from waveshare_epd import epd3in7
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
@@ -17,19 +16,17 @@ import traceback
 logging.basicConfig(level=logging.DEBUG)
 
 try:
-    print("starting")
     logging.info("epd3in7 Demo")
     
     epd = epd3in7.EPD()
     logging.info("init and Clear")
     epd.init(0)
     epd.Clear(0xFF, 0)
-    print("cleared")
     
     font36 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 36)
     font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
     font18 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 18)
-    
+    '''
     # Drawing on the Horizontal image
     logging.info("1.Drawing on the Horizontal image...")
     Himage = Image.new('L', (epd.height, epd.width), 0xFF)  # 0xFF: clear the frame
@@ -85,7 +82,7 @@ try:
     draw.chord((70, 150, 120, 200), 0, 360, fill = 0)
     epd.display_4Gray(epd.getbuffer_4Gray(Limage))
     time.sleep(5)
-
+    '''
     # partial update, just 1 Gary mode
     logging.info("5.show time, partial update, just 1 Gary mode")
     epd.init(1)         # 1 Gary mode

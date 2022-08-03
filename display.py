@@ -52,28 +52,28 @@ class display:
         element = WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="inner-content"]/div[3]/div[1]/div/div[1]/div[1]/lib-city-current-conditions/div'))).get_attribute("value")
         element = driver.find_element(By.XPATH, '//*[@id="inner-content"]/div[3]/div[1]/div/div[1]/div[1]/lib-city-current-conditions/div')
         driver.execute_script("window.scrollTo(0, 200)")
-        element.screenshot("weatherData.png")
+        element.screenshot(self.image_path + "weatherData.png")
         driver.quit()
 
-        pic = Image.open("weatherData.png").convert("L")
+        pic = Image.open(self.image_path + "weatherData.png").convert("L")
         enhancer = ImageEnhance.Contrast(pic)
         pic = enhancer.enhance(4)
         width, height = pic.size
         
         current_temp = pic.crop((50, 140, width - 200, height - 160))
-        current_temp.save("currentTemp.png")
+        current_temp.save(self.image_path + "currentTemp.png")
         self.resize_image("currentTemp.png", 170)
         
         high_low = pic.crop((65, 120, width - 220, height - 245))
-        high_low.save("highLow.png")
+        high_low.save(self.image_path + "highLow.png")
         self.resize_image("highLow.png", 100)
 
         like_temp = pic.crop((70, 215, width - 220, height - 140))
-        like_temp.save("likeTemp.png")
+        like_temp.save(self.image_path + "likeTemp.png")
         self.resize_image("likeTemp.png", 100)
         
         weatherImage = pic.crop((245, 60, width - 40, height - 215))
-        weatherImage = weatherImage.save("weatherImage.png")
+        weatherImage = weatherImage.save(self.image_path + "weatherImage.png")
         self.resize_image("weatherImage.png", 100)
     
     def update_time(self):
@@ -95,7 +95,7 @@ class display:
         data_draw.text((15, 110), current_date, font=self.font_size(38), fill=0)
         data_draw.text((0, 270), str(ip_adress), font=self.font_size(10), fill=0)        
 
-        data_draw.rectangle((date_width + 10, 0, date_width + 15, 280), fill=0)
+        data_draw.rectangle((date_width + 14, 0, date_width + 19, 280), fill=0)
 
     def update_weather(self):
         pic = Image.open(self.image_path + 'currentTemp.png')
@@ -123,7 +123,8 @@ class display:
         self.update_display()
 
         if current_minutes == 30 or current_minutes == 0:
-            scrape_weather()
+            print("scraping weather at " + datetime.now().strftime('%H:%M'))
+            self.scrape_weather()
 
 if __name__ == "__main__":
     d = display()
